@@ -13,5 +13,11 @@
         @Html.LabelFor(p => p.Licence_plate.Plate) @Html.TextBoxFor(p => p.Licence_plate.Plate)
         <button type="submit">Search</button>
     }
+
+    @*@{foreach (var plate in Model.PlateList)
+        {
+            @plate.Car_model
+        }
+    }*@
 </body>
 </html>

@@ -18,7 +18,26 @@ namespace LicencePlateFinder.Repositories
 
         public List<Licence_plate> SearchPlates(string LicencePlateFromSearchBox)
         {
-            return licence_PlateContext.Licence_plates.Where(p => p.Plate.Contains(LicencePlateFromSearchBox)).ToList();
+            //            return licence_PlateContext.Licence_plates.Where(p => p.Plate.Contains("HUE-076")).ToList();
+            return licence_PlateContext.Licence_plates.ToList();
+        }
+
+        public List<Licence_plate> ApiSearchQueryByPlate(string plate)
+        {
+            return licence_PlateContext.Licence_plates.Where(p => p.Plate.Contains(plate)).ToList();
+        }
+
+        public List<Licence_plate> ApiSearchQueryByPolice(int police)
+        {
+            if (police == 1)
+            {
+                return licence_PlateContext.Licence_plates.Where(p => p.Plate.StartsWith("RB")).ToList();
+            }
+            else
+            {
+                return licence_PlateContext.Licence_plates.Where(p => !p.Plate.StartsWith("RB")).ToList();
+            }
+
         }
     }
 }

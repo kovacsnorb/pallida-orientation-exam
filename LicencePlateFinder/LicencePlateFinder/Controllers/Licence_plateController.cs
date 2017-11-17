@@ -28,23 +28,40 @@ namespace LicencePlateFinder.Controllers
             return View();
         }
 
-        [Route("")]
-        [HttpPost]
+        [Route("/list")]
+        [HttpGet]
         public IActionResult Index(PlateViewModel plateViewModel)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    redditpostRepository.AddNew(newPost);
-            //    return RedirectToAction("ListOfSearches");
-
             var listOfMatchingPlates = licence_PlateRepository.SearchPlates(plateViewModel.Licence_plate.Plate);
             return View(plateViewModel);
-            
-            //}
-            //else
-            //{
-            //    return View("Add");
-            //}
+        }
+
+        [Route("/searchPlate")]
+        [HttpGet]
+        public IActionResult ApiSearch([FromQuery] string q)
+        {
+            if (q.Length != 0)
+            {
+                return Json(licence_PlateRepository.ApiSearchQueryByPlate(q));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("/searchPolice")]
+        [HttpGet]
+        public IActionResult ApiSearch([FromQuery] int? police)
+        {
+            if (!(police == null))
+            {
+                return Json(licence_PlateRepository.ApiSearchQueryByPolice((int)police));
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
