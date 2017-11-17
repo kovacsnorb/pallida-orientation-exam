@@ -37,7 +37,11 @@ namespace LicencePlateFinder.Repositories
             {
                 return licence_PlateContext.Licence_plates.Where(p => !p.Plate.StartsWith("RB")).ToList();
             }
+        }
 
+        public List<Licence_plate> ApiSearchBrand(string brand)
+        {
+            return licence_PlateContext.Licence_plates.Where(p => p.Car_brand == brand).ToList();
         }
     }
 }

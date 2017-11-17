@@ -63,5 +63,19 @@ namespace LicencePlateFinder.Controllers
                 return NotFound();
             }
         }
+
+        [Route("api/search/{brand}")]
+        [HttpGet]
+        public IActionResult ApiSearchBrand([FromRoute] string brand)
+        {
+            if (brand.Length != 0)
+            {
+                return Json(licence_PlateRepository.ApiSearchBrand(brand));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
