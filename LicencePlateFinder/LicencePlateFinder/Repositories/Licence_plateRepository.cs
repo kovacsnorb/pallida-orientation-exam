@@ -39,6 +39,18 @@ namespace LicencePlateFinder.Repositories
             }
         }
 
+        public List<Licence_plate> ApiSearchQueryByDiplomat(int diplomat)
+        {
+            if (diplomat == 1)
+            {
+                return licence_PlateContext.Licence_plates.Where(p => p.Plate.StartsWith("DT")).ToList();
+            }
+            else
+            {
+                return licence_PlateContext.Licence_plates.Where(p => !p.Plate.StartsWith("DT")).ToList();
+            }
+        }
+
         public List<Licence_plate> ApiSearchBrand(string brand)
         {
             return licence_PlateContext.Licence_plates.Where(p => p.Car_brand == brand).ToList();

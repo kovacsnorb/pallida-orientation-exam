@@ -36,7 +36,7 @@ namespace LicencePlateFinder.Controllers
             return View(plateViewModel);
         }
 
-        [Route("/searchPlate")]
+        [Route("api/searchPlate")]
         [HttpGet]
         public IActionResult ApiSearch([FromQuery] string q)
         {
@@ -50,13 +50,42 @@ namespace LicencePlateFinder.Controllers
             }
         }
 
-        [Route("/searchPolice")]
+        [Route("searchPlate")]
+        [HttpGet]
+        public IActionResult Index([FromQuery] string q)
+        {
+            if (q.Length != 0)
+            {
+                var list = licence_PlateRepository.ApiSearchQueryByPlate(q);
+                return View(list);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [Route("api/searchPolice")]
         [HttpGet]
         public IActionResult ApiSearch([FromQuery] int? police)
         {
             if (!(police == null))
             {
                 return Json(licence_PlateRepository.ApiSearchQueryByPolice((int)police));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("api/searchDiplomat")]
+        [HttpGet]
+        public IActionResult ApiSearch3([FromQuery] int? diplomat)
+        {
+            if (!(diplomat == null))
+            {
+                return Json(licence_PlateRepository.ApiSearchQueryByDiplomat((int)diplomat));
             }
             else
             {
