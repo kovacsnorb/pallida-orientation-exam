@@ -11,6 +11,7 @@ using System.IO;
 using LicencePlateFinder.Entities;
 using Microsoft.EntityFrameworkCore;
 using LicencePlateFinder.Repositories;
+using LicencePlateFinder.ViewModels.PlateViewModel;
 
 namespace LicencePlateFinder
 {
@@ -30,6 +31,7 @@ namespace LicencePlateFinder
 
             services.AddMvc();
             services.AddDbContext<Licence_plateContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Licence_plateConnection"]));
+            services.AddSingleton<PlateViewModel>();
             services.AddScoped<Licence_plateRepository>();
         }
 

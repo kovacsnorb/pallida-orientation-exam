@@ -1,0 +1,17 @@
+﻿@model LicencePlateFinder.ViewModels.PlateViewModel.PlateViewModel
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>
+        Licence plate checker
+    </h1>
+
+    @using (Html.BeginForm("index", "licence_plate"))
+    {
+        @Html.LabelFor(p => p.Licence_plate.Plate) @Html.TextBoxFor(p => p.Licence_plate.Plate)
+        <button type="submit">Search</button>
+    }
+</body>
+</html>
